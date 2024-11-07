@@ -24,18 +24,6 @@ namespace FailButton {
 			Log = logger;
 		}
 
-		#region BSIPA Config
-		//Uncomment to use BSIPA's config
-		/*
-        [Init]
-        public void InitWithConfig(Config conf)
-        {
-            Configuration.PluginConfig.Instance = conf.Generated<Configuration.PluginConfig>();
-            Log.Debug("Config loaded");
-        }
-        */
-		#endregion
-
 		[OnStart]
 		public void OnApplicationStart() {
 			harmony = new Harmony("Kinsi55.BeatSaber.FailButton");
