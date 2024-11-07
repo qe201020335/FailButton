@@ -36,8 +36,8 @@ namespace FailButton.HarmonyPatches
             GameObject.Destroy(_b.GetComponentInChildren<LocalizedTextMeshProUGUI>());
 
             var r = _b.GetComponent<RectTransform>();
-            r.anchorMin = new Vector2(0.53f, 0);
-            r.anchorMax = new Vector2(0.64f, 0.5f);
+            r.anchorMin = new Vector2(0.22f, 0.25f);
+            r.anchorMax = new Vector2(0.33f, 0.75f);
 
             _b.localPosition = new Vector3(48.69f, -2.6f, 0);
 
@@ -65,8 +65,8 @@ namespace FailButton.HarmonyPatches
 
             r = t.GetComponentInParent<RectTransform>();
 
-            r.anchorMin = new Vector2(1, 0);
-            r.anchorMax = new Vector2(0, 1);
+            r.anchorMin = new Vector2(0, 0);
+            r.anchorMax = new Vector2(1, 1);
 
             r.offsetMin = r.offsetMax = Vector2.zero;
         }
