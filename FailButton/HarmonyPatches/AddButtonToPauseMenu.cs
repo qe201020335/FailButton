@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace FailButton.HarmonyPatches
 {
-    [HarmonyPatch(typeof(PauseMenuManager), "Start")]
+    [HarmonyPatch(typeof(PauseMenuManager), nameof(PauseMenuManager.Start))]
     static class AddButtonToPauseMenu
     {
         static Transform _b = null;
@@ -57,10 +57,8 @@ namespace FailButton.HarmonyPatches
                 if (s == null)
                     return;
 
-                ReflectionUtil.GetField<StandardLevelGameplayManager.InitData, StandardLevelGameplayManager>(s, "_initData")
-                    .SetField("failOn0Energy", true);
-
-                AccessTools.Method(typeof(StandardLevelGameplayManager), "HandleGameEnergyDidReach0").Invoke(s, null);
+                s._initData.SetField(nameof(s._initData.failOn0Energy), true);
+                s.HandleGameEnergyDidReach0();
             });
 
             yield return null;
