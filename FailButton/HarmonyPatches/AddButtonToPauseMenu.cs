@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using HarmonyLib;
 using HMUI;
-using Polyglot;
+using BGLib.Polyglot;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +17,7 @@ namespace FailButton.HarmonyPatches
 
         static void Postfix(PauseMenuManager __instance)
         {
-            SharedCoroutineStarter.instance.StartCoroutine(DoTheFunny(__instance));
+            __instance.StartCoroutine(DoTheFunny(__instance));
         }
 
         static IEnumerator DoTheFunny(PauseMenuManager __instance)
@@ -57,7 +57,7 @@ namespace FailButton.HarmonyPatches
                 if (s == null)
                     return;
 
-                s._initData.SetField(nameof(s._initData.failOn0Energy), true);
+                s._initData.SetField(nameof(s._initData.continueGameplayWith0Energy), false);
                 s.HandleGameEnergyDidReach0();
             });
 
