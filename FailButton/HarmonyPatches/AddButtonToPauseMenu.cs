@@ -17,10 +17,11 @@ namespace FailButton.HarmonyPatches
 
         static void Postfix(PauseMenuManager __instance)
         {
-            __instance.StartCoroutine(DoTheFunny(__instance));
+            var gameplayManager = Resources.FindObjectsOfTypeAll<StandardLevelGameplayManager>().FirstOrDefault();
+            if (gameplayManager != null) __instance.StartCoroutine(DoTheFunny(__instance, gameplayManager));
         }
 
-        static IEnumerator DoTheFunny(PauseMenuManager __instance)
+        static IEnumerator DoTheFunny(PauseMenuManager __instance, StandardLevelGameplayManager gameplayManager)
         {
             if (_b != null)
                 yield break;
@@ -52,13 +53,8 @@ namespace FailButton.HarmonyPatches
 
             b.onClick.AddListener(() =>
             {
-                var s = Resources.FindObjectsOfTypeAll<StandardLevelGameplayManager>().FirstOrDefault();
-
-                if (s == null)
-                    return;
-
-                s._initData.SetField(nameof(s._initData.continueGameplayWith0Energy), false);
-                s.HandleGameEnergyDidReach0();
+                gameplayManager._initData.SetField(nameof(gameplayManager._initData.continueGameplayWith0Energy), false);
+                gameplayManager.HandleGameEnergyDidReach0();
             });
 
             yield return null;
